@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "359742834165",
+    "project_id": "jobsearch-ac09c",
+    "storage_bucket": "jobsearch-ac09c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:359742834165:android:04b61f1ad55c7ee1daccbc",
+        "android_client_info": {
+          "package_name": "student.inti.a202sgi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIvItPJcIOOHtGGuBWyDKEcOpZIrX16Wo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
