@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">A202SGI</string>
+    <string name="email_hint">Email</string>
+    <string name="app_name">Job Search App</string>
+    <string name="password_hint">Password</string>
+    <string name="login_text">Login</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="register_text">Register</string>
+    <string name="sign_up_text">Don\'t have an account? Sign Up</string>
+    <string name="forgot_password_text">Forgot Password?</string>
+    <string name="reset_password_text">Reset Password</string>
+
 </resources>
