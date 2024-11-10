@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
-    private List<Job> jobList;
+
+    private final List<Job> jobList;
 
     public JobAdapter(List<Job> jobList) {
         this.jobList = jobList;
@@ -35,12 +36,8 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         return jobList.size();
     }
 
-    public void updateList(List<Job> newList) {
-        jobList = newList;
-        notifyDataSetChanged();
-    }
-
     public static class JobViewHolder extends RecyclerView.ViewHolder {
+
         TextView jobTitleTextView, companyTextView, locationTextView;
 
         public JobViewHolder(@NonNull View itemView) {
@@ -51,3 +48,4 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         }
     }
 }
+

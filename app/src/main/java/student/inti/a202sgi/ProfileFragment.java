@@ -18,7 +18,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileFragment extends Fragment {
-    private TextView displayName, displayEmail, displayAge, displayGender, displayDescription;
+
+    private TextView nameTextView, ageTextView, genderTextView, descriptionTextView, emailTextView;
     private Button editProfileButton, resetPasswordButton, logoutButton;
     private FirebaseAuth auth;
     private DatabaseReference dbRef;
@@ -30,35 +31,35 @@ public class ProfileFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        // Initialize Firebase Auth and Database
         auth = FirebaseAuth.getInstance();
         currentUser = auth.getCurrentUser();
         dbRef = FirebaseDatabase.getInstance().getReference("users").child(currentUser.getUid());
 
-        // Bind views
-        displayName = view.findViewById(R.id.displayName);
-        displayEmail = view.findViewById(R.id.displayEmail);
-        displayAge = view.findViewById(R.id.displayAge);
-        displayGender = view.findViewById(R.id.displayGender);
-        displayDescription = view.findViewById(R.id.displayDescription);
+        // Initialize UI elements
+        emailTextView = view.findViewById(R.id.emailTextView);
+        nameTextView = view.findViewById(R.id.nameTextView);
+        ageTextView = view.findViewById(R.id.ageTextView);
+        genderTextView = view.findViewById(R.id.genderTextView);
+        descriptionTextView = view.findViewById(R.id.descriptionTextView);
 
         editProfileButton = view.findViewById(R.id.editProfileButton);
         resetPasswordButton = view.findViewById(R.id.resetPasswordButton);
         logoutButton = view.findViewById(R.id.logoutButton);
 
-        // Load Profile Data
+        emailTextView.setText(currentUser.getEmail());
+
         loadUserProfile();
 
-        // Edit Profile action
+        // Edit Profile button
         editProfileButton.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), EditProfileActivity.class);
             startActivity(intent);
         });
 
-        // Reset Password action
+        // Reset password
         resetPasswordButton.setOnClickListener(v -> resetPassword());
 
-        // Logout action
+        // Logout
         logoutButton.setOnClickListener(v -> logout());
 
         return view;
@@ -67,25 +68,25 @@ public class ProfileFragment extends Fragment {
     private void loadUserProfile() {
         dbRef.get().addOnSuccessListener(snapshot -> {
             if (snapshot.exists()) {
-                displayName.setText(snapshot.child("name").getValue(String.class));
-                displayEmail.setText(currentUser.getEmail());
-                displayAge.setText(snapshot.child("age").getValue(String.class));
-                displayGender.setText(snapshot.child("gender").getValue(String.class));
-                displayDescription.setText(snapshot.child("description").getValue(String.class));
+                String name = snapshot.child("name").getValue(String.class);
+                String age = snapshot.child("age").getValue(String.class);
+                String gender = snapshot.child("gender").getValue(String.class);
+                String description = snapshot.child("description").getValue(String.class);
+
+                nameTextView.setText(name != null ? name : "Name");
+                ageTextView.setText(age != null ? age : "Age");
+                genderTextView.setText(gender != null ? gender : "Gender");
+                descriptionTextView.setText(description != null ? description : "Description");
             }
-        }).addOnFailureListener(e ->
-                Toast.makeText(getContext(), "Failed to load profile", Toast.LENGTH_SHORT).show()
-        );
+        });
     }
 
     private void resetPassword() {
         auth.sendPasswordResetEmail(currentUser.getEmail())
                 .addOnSuccessListener(aVoid ->
-                        Toast.makeText(getContext(), "Password reset email sent", Toast.LENGTH_SHORT).show()
-                )
+                        Toast.makeText(getContext(), "Password reset email sent", Toast.LENGTH_SHORT).show())
                 .addOnFailureListener(e ->
-                        Toast.makeText(getContext(), "Failed to send reset email", Toast.LENGTH_SHORT).show()
-                );
+                        Toast.makeText(getContext(), "Failed to send reset email", Toast.LENGTH_SHORT).show());
     }
 
     private void logout() {
@@ -95,4 +96,5 @@ public class ProfileFragment extends Fragment {
         startActivity(intent);
     }
 }
+
 

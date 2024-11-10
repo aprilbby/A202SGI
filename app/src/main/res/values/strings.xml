@@ -42,11 +42,12 @@
     <string name="navigation_home">Home</string>
     <string name="navigation_profile">Profile</string>
 
-        <string name="age_hint">Age</string>
-        <string name="gender_hint">Gender</string>
-        <string name="description_hint">Description</string>
-
+    <!-- Profile Edit Fields -->
+    <string name="age_hint">Age</string>
+    <string name="gender_hint">Gender</string>
+    <string name="description_hint">Description</string>
 </resources>
+
 
 
 

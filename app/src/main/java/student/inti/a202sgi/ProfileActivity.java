@@ -2,27 +2,26 @@ package student.inti.a202sgi;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import java.util.HashMap;
-import java.util.Map;
+import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity {
-    private TextView displayNameTextView, displayEmailTextView;
-    private EditText editNameEditText;
-    private Button editButton, saveButton, resetPasswordButton;
+
+    private static final String TAG = "ProfileActivity";
+
+    private TextView displayNameTextView, displayEmailTextView, displayAgeTextView, displayGenderTextView, displayDescriptionTextView;
+    private Button editProfileButton, resetPasswordButton, logoutButton;
     private FirebaseAuth auth;
     private DatabaseReference dbRef;
     private FirebaseUser currentUser;
@@ -32,103 +31,91 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        // Set up toolbar with back button
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle("Profile");
+        auth = FirebaseAuth.getInstance();
+        currentUser = auth.getCurrentUser();
+
+        if (currentUser == null) {
+            Toast.makeText(this, "User not logged in", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
+            finish();
+            return;
         }
 
-        // Initialize Firebase and UI components
-        auth = FirebaseAuth.getInstance();
-        dbRef = FirebaseDatabase.getInstance().getReference("users");
-        currentUser = auth.getCurrentUser();
+        dbRef = FirebaseDatabase.getInstance().getReference("users").child(currentUser.getUid());
 
         displayNameTextView = findViewById(R.id.displayNameTextView);
         displayEmailTextView = findViewById(R.id.displayEmailTextView);
-        editNameEditText = findViewById(R.id.editNameEditText);
-        editButton = findViewById(R.id.editButton);
-        saveButton = findViewById(R.id.saveButton);
+        displayAgeTextView = findViewById(R.id.displayAgeTextView);
+        displayGenderTextView = findViewById(R.id.displayGenderTextView);
+        displayDescriptionTextView = findViewById(R.id.displayDescriptionTextView);
+
+        editProfileButton = findViewById(R.id.editProfileButton);
         resetPasswordButton = findViewById(R.id.resetPasswordButton);
+        logoutButton = findViewById(R.id.logoutButton);
 
-        // Show email and disable editing
         displayEmailTextView.setText(currentUser.getEmail());
-        editNameEditText.setVisibility(View.GONE);
-        saveButton.setVisibility(View.GONE);
 
-        // Load current profile data
         loadUserProfile();
 
-        // Edit button functionality
-        editButton.setOnClickListener(view -> {
-            editNameEditText.setVisibility(View.VISIBLE);
-            editNameEditText.setText(displayNameTextView.getText());
-            saveButton.setVisibility(View.VISIBLE);
-            editButton.setVisibility(View.GONE);
+        editProfileButton.setOnClickListener(view -> {
+            startActivity(new Intent(ProfileActivity.this, EditProfileActivity.class));
         });
 
-        // Save button functionality
-        saveButton.setOnClickListener(view -> saveUserProfile());
-
-        // Reset password functionality
         resetPasswordButton.setOnClickListener(view -> resetPassword());
+
+        logoutButton.setOnClickListener(view -> {
+            auth.signOut();
+            startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
+            finish();
+        });
     }
 
     private void loadUserProfile() {
-        dbRef.child(currentUser.getUid()).get().addOnCompleteListener(task -> {
-            if (task.isSuccessful() && task.getResult().exists()) {
-                String name = task.getResult().child("name").getValue(String.class);
-                displayNameTextView.setText(name);
-            } else {
+        dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String name = snapshot.child("name").getValue(String.class);
+                    String age = snapshot.child("age").getValue(String.class);
+                    String gender = snapshot.child("gender").getValue(String.class);
+                    String description = snapshot.child("description").getValue(String.class);
+
+                    displayNameTextView.setText(name != null ? name : "N/A");
+                    displayAgeTextView.setText(age != null ? age : "N/A");
+                    displayGenderTextView.setText(gender != null ? gender : "N/A");
+                    displayDescriptionTextView.setText(description != null ? description : "N/A");
+
+                    Log.d(TAG, "Profile loaded successfully");
+                } else {
+                    Toast.makeText(ProfileActivity.this, "Profile data not found", Toast.LENGTH_SHORT).show();
+                    Log.e(TAG, "Profile data not found for user ID: " + currentUser.getUid());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(ProfileActivity.this, "Failed to load profile", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "Error loading profile: " + error.getMessage());
             }
         });
     }
 
-    private void saveUserProfile() {
-        String name = editNameEditText.getText().toString().trim();
-
-        if (name.isEmpty()) {
-            Toast.makeText(this, "Name cannot be empty", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Map<String, Object> profileData = new HashMap<>();
-        profileData.put("name", name);
-
-        dbRef.child(currentUser.getUid()).setValue(profileData)
-                .addOnSuccessListener(aVoid -> {
-                    // Show success message
-                    Toast.makeText(ProfileActivity.this, "Profile updated", Toast.LENGTH_SHORT).show();
-                    // Immediately update display and hide edit views
-                    displayNameTextView.setText(name);
-                    editNameEditText.setVisibility(View.GONE);
-                    saveButton.setVisibility(View.GONE);
-                    editButton.setVisibility(View.VISIBLE);
-                })
-                .addOnFailureListener(e ->
-                        Toast.makeText(ProfileActivity.this, "Failed to update profile", Toast.LENGTH_SHORT).show()
-                );
-    }
-
     private void resetPassword() {
-        auth.sendPasswordResetEmail(currentUser.getEmail())
-                .addOnSuccessListener(aVoid ->
-                        Toast.makeText(ProfileActivity.this, "Password reset email sent", Toast.LENGTH_SHORT).show()
-                )
-                .addOnFailureListener(e ->
-                        Toast.makeText(ProfileActivity.this, "Failed to send reset email", Toast.LENGTH_SHORT).show()
-                );
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-            return true;
+        if (currentUser.getEmail() != null) {
+            auth.sendPasswordResetEmail(currentUser.getEmail())
+                    .addOnSuccessListener(aVoid -> {
+                        Toast.makeText(ProfileActivity.this, "Password reset email sent", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "Password reset email sent successfully");
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(ProfileActivity.this, "Failed to send reset email", Toast.LENGTH_SHORT).show();
+                        Log.e(TAG, "Error sending password reset email: " + e.getMessage());
+                    });
+        } else {
+            Toast.makeText(this, "Email not available", Toast.LENGTH_SHORT).show();
+            Log.e(TAG, "Email not available for password reset");
         }
-        return super.onOptionsItemSelected(item);
     }
 }
+
+
