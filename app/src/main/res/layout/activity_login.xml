@@ -15,11 +15,23 @@
         android:src="@drawable/ic_app_logo"
         android:contentDescription="@string/app_icon" />
 
+    <TextView
+        android:id="@+id/appTitleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/appLogo"
+        android:layout_centerHorizontal="true"
+        android:text="@string/app_name"
+        android:textSize="20sp"
+        android:textColor="#6200EE"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp" />
+
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/appLogo"
+        android:layout_below="@id/appTitleTextView"
         android:layout_marginTop="32dp"
         android:autofillHints="emailAddress"
         android:background="@drawable/rounded_edittext_background"
@@ -74,20 +86,34 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/signUpTextView"
+        android:id="@+id/signUpPromptTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/forgotPasswordTextView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="12dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:minHeight="48dp"
-        android:padding="12dp"
-        android:text="@string/sign_up_text"
-        android:textColor="#6200EE"
+        android:text="Don't have an account? "
+        android:textColor="#757575"
         android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/signUpTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/signUpPromptTextView"
+        android:layout_alignBaseline="@id/signUpPromptTextView"
+        android:clickable="true"
+        android:text="@string/sign_up_text_only"
+        android:textColor="#6200EE"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
 </RelativeLayout>
+
+
+
+
+
 
 
 

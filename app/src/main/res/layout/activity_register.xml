@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f5f5f5"
@@ -16,28 +15,27 @@
         android:contentDescription="@string/app_icon" />
 
     <TextView
-        android:id="@+id/appTitle"
+        android:id="@+id/appNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/appLogo"
         android:layout_centerHorizontal="true"
-        android:text="Job Search"
-        android:textSize="20sp"
-        android:textColor="#333333"
-        android:fontFamily="sans-serif-light"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="8dp"
+        android:text="@string/app_name"
+        android:textColor="#6200EE"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/appTitle"
+        android:layout_below="@id/appNameTextView"
         android:layout_marginTop="32dp"
         android:hint="@string/email_hint"
-        android:textColorHint="#AAAAAA"
         android:inputType="textEmailAddress"
-        android:padding="16dp"
-        android:background="@drawable/rounded_edittext_background" />
+        android:background="@drawable/rounded_edittext_background"
+        android:padding="16dp" />
 
     <EditText
         android:id="@+id/passwordEditText"
@@ -46,10 +44,9 @@
         android:layout_below="@id/emailEditText"
         android:layout_marginTop="16dp"
         android:hint="@string/password_hint"
-        android:textColorHint="#AAAAAA"
         android:inputType="textPassword"
-        android:padding="16dp"
-        android:background="@drawable/rounded_edittext_background" />
+        android:background="@drawable/rounded_edittext_background"
+        android:padding="16dp" />
 
     <EditText
         android:id="@+id/confirmPasswordEditText"
@@ -58,22 +55,21 @@
         android:layout_below="@id/passwordEditText"
         android:layout_marginTop="16dp"
         android:hint="@string/confirm_password_hint"
-        android:textColorHint="#AAAAAA"
         android:inputType="textPassword"
-        android:padding="16dp"
-        android:background="@drawable/rounded_edittext_background" />
+        android:background="@drawable/rounded_edittext_background"
+        android:padding="16dp" />
 
     <Button
         android:id="@+id/registerButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/register_text"
         android:layout_below="@id/confirmPasswordEditText"
         android:layout_marginTop="20dp"
-        android:text="@string/register_text"
-        android:backgroundTint="#6200EE"
-        android:textColor="@android:color/white"
-        android:background="@drawable/rounded_button_background" />
+        android:background="@drawable/rounded_button_background"
+        android:textColor="@android:color/white" />
 </RelativeLayout>
+
 
 
 

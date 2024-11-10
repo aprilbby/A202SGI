@@ -40,10 +40,10 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.JobViewHolder> {
         notifyDataSetChanged();
     }
 
-    static class JobViewHolder extends RecyclerView.ViewHolder {
+    public static class JobViewHolder extends RecyclerView.ViewHolder {
         TextView jobTitleTextView, companyTextView, locationTextView;
 
-        JobViewHolder(View itemView) {
+        public JobViewHolder(@NonNull View itemView) {
             super(itemView);
             jobTitleTextView = itemView.findViewById(R.id.jobTitleTextView);
             companyTextView = itemView.findViewById(R.id.companyTextView);

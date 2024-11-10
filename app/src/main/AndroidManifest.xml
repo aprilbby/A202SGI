@@ -32,6 +32,9 @@
         <!-- ProfileActivity Declaration -->
         <activity android:name=".ProfileActivity" />
 
+        <activity android:name=".EditProfileActivity" />
+
+
     </application>
 
 </manifest>

@@ -1,99 +1,110 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f5f5f5"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/displayNameTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Full Name"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp" />
 
+<!-- Email Display -->
     <TextView
-        android:id="@+id/displayEmailTextView"
-        android:layout_width="match_parent"
+        android:id="@+id/displayEmail"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/displayNameTextView"
         android:text="Email"
+        android:textSize="14sp"
+        android:textColor="#6200EE"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Name Display -->
+    <TextView
+        android:id="@+id/displayName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/displayEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp" />
+
+    <!-- Profile Details -->
+    <TextView
+        android:id="@+id/displayAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Age"
         android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/displayName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp" />
 
-    <!-- Editable Name -->
-    <EditText
-        android:id="@+id/editNameEditText"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/displayGender"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter new name"
-        android:layout_below="@id/displayEmailTextView"
-        android:layout_marginTop="16dp"
-        android:visibility="gone" />
+        android:text="Gender"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/displayAge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
 
-    <!-- Skills Field -->
-    <EditText
-        android:id="@+id/editSkillsEditText"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/displayDescription"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter skills"
-        android:layout_below="@id/editNameEditText"
-        android:layout_marginTop="8dp"
-        android:visibility="gone" />
+        android:text="Description"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/displayGender"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
 
-    <!-- Experience Field -->
-    <EditText
-        android:id="@+id/editExperienceEditText"
+    <!-- Buttons -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter experience"
-        android:layout_below="@id/editSkillsEditText"
-        android:layout_marginTop="8dp"
-        android:visibility="gone" />
+        android:orientation="vertical"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/displayDescription"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp">
 
-    <!-- Education Field -->
-    <EditText
-        android:id="@+id/editEducationEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter education"
-        android:layout_below="@id/editExperienceEditText"
-        android:layout_marginTop="8dp"
-        android:visibility="gone" />
+        <Button
+            android:id="@+id/editProfileButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Edit Profile"
+            android:backgroundTint="#6200EE"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="12dp" />
 
-    <!-- Edit, Save, Reset Password, and Logout Buttons -->
-    <Button
-        android:id="@+id/editButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Edit Profile"
-        android:layout_below="@id/editEducationEditText"
-        android:layout_marginTop="16dp" />
+        <Button
+            android:id="@+id/resetPasswordButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Reset Password"
+            android:backgroundTint="#6200EE"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="12dp" />
 
-    <Button
-        android:id="@+id/saveButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save Changes"
-        android:layout_below="@id/editButton"
-        android:layout_marginTop="16dp"
-        android:visibility="gone" />
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:backgroundTint="#6200EE"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/resetPasswordButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Reset Password"
-        android:layout_below="@id/saveButton"
-        android:layout_marginTop="16dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Button
-        android:id="@+id/logoutButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:layout_below="@id/resetPasswordButton"
-        android:layout_marginTop="16dp" />
-</RelativeLayout>
 
 
