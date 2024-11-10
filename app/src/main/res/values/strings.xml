@@ -46,7 +46,10 @@
     <string name="age_hint">Age</string>
     <string name="gender_hint">Gender</string>
     <string name="description_hint">Description</string>
-</resources>
+        <string name="profile_data_not_found">Profile data not found</string>
+        <string name="reset_password_not_available">Password reset not available</string>
+        <string name="all_fields_required">All fields must be filled</string>
+    </resources>
 
 
 

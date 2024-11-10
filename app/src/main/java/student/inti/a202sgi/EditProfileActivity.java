@@ -1,54 +1,55 @@
 package student.inti.a202sgi;
 
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import java.util.HashMap;
-import java.util.Map;
 
 public class EditProfileActivity extends AppCompatActivity {
 
     private EditText nameEditText, ageEditText, genderEditText, descriptionEditText;
     private Button saveChangesButton;
-    private FirebaseAuth auth;
-    private DatabaseReference dbRef;
-    private FirebaseUser currentUser;
+    private DatabaseHelper dbHelper;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        auth = FirebaseAuth.getInstance();
-        currentUser = auth.getCurrentUser();
-        dbRef = FirebaseDatabase.getInstance().getReference("users").child(currentUser.getUid());
+        // Initialize Database Helper
+        dbHelper = new DatabaseHelper(this);
 
+        // Initialize UI elements
         nameEditText = findViewById(R.id.nameEditText);
         ageEditText = findViewById(R.id.ageEditText);
         genderEditText = findViewById(R.id.genderEditText);
         descriptionEditText = findViewById(R.id.descriptionEditText);
         saveChangesButton = findViewById(R.id.saveChangesButton);
 
+        // Load current user profile
         loadUserProfile();
 
+        // Set onClickListener for Save button
         saveChangesButton.setOnClickListener(v -> saveUserProfile());
     }
 
     private void loadUserProfile() {
-        dbRef.get().addOnSuccessListener(snapshot -> {
-            if (snapshot.exists()) {
-                nameEditText.setText(snapshot.child("name").getValue(String.class));
-                ageEditText.setText(snapshot.child("age").getValue(String.class));
-                genderEditText.setText(snapshot.child("gender").getValue(String.class));
-                descriptionEditText.setText(snapshot.child("description").getValue(String.class));
-            }
-        });
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.query("users", null, "id = ?", new String[]{"1"}, null, null, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            nameEditText.setText(cursor.getString(cursor.getColumnIndexOrThrow("name")));
+            ageEditText.setText(cursor.getString(cursor.getColumnIndexOrThrow("age")));
+            genderEditText.setText(cursor.getString(cursor.getColumnIndexOrThrow("gender")));
+            descriptionEditText.setText(cursor.getString(cursor.getColumnIndexOrThrow("description")));
+            cursor.close();
+        }
     }
 
     private void saveUserProfile() {
@@ -57,21 +58,30 @@ public class EditProfileActivity extends AppCompatActivity {
         String gender = genderEditText.getText().toString().trim();
         String description = descriptionEditText.getText().toString().trim();
 
-        Map<String, Object> profileData = new HashMap<>();
-        profileData.put("name", name);
-        profileData.put("age", age);
-        profileData.put("gender", gender);
-        profileData.put("description", description);
+        if (name.isEmpty() || age.isEmpty() || gender.isEmpty() || description.isEmpty()) {
+            Toast.makeText(this, "All fields must be filled", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        dbRef.updateChildren(profileData)
-                .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(EditProfileActivity.this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
-                    finish();
-                })
-                .addOnFailureListener(e ->
-                        Toast.makeText(EditProfileActivity.this, "Failed to update profile", Toast.LENGTH_SHORT).show());
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("name", name);
+        values.put("age", age);
+        values.put("gender", gender);
+        values.put("description", description);
+
+        long result = db.update("users", values, "id = ?", new String[]{"1"});
+
+        if (result != -1) {
+            Toast.makeText(this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
+            finish(); // Close activity and return to ProfileActivity
+        } else {
+            Toast.makeText(this, "Failed to update profile", Toast.LENGTH_SHORT).show();
+        }
     }
 }
+
+
 
 
 

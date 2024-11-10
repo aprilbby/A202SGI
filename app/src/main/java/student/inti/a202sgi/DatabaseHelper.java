@@ -10,13 +10,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "UserProfile.db";
     private static final int DATABASE_VERSION = 1;
-    public static final String TABLE_NAME = "profile";
-    public static final String COLUMN_ID = "id";
-    public static final String COLUMN_NAME = "name";
-    public static final String COLUMN_AGE = "age";
-    public static final String COLUMN_GENDER = "gender";
-    public static final String COLUMN_DESCRIPTION = "description";
-    public static final String COLUMN_EMAIL = "email";
+    public static final String TABLE_NAME = "users";
+    public static final String COL_ID = "id";
+    public static final String COL_NAME = "name";
+    public static final String COL_AGE = "age";
+    public static final String COL_GENDER = "gender";
+    public static final String COL_DESCRIPTION = "description";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -25,12 +24,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createTable = "CREATE TABLE " + TABLE_NAME + " (" +
-                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                COLUMN_NAME + " TEXT, " +
-                COLUMN_AGE + " TEXT, " +
-                COLUMN_GENDER + " TEXT, " +
-                COLUMN_DESCRIPTION + " TEXT, " +
-                COLUMN_EMAIL + " TEXT)";
+                COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COL_NAME + " TEXT, " +
+                COL_AGE + " TEXT, " +
+                COL_GENDER + " TEXT, " +
+                COL_DESCRIPTION + " TEXT)";
         db.execSQL(createTable);
     }
 
@@ -40,22 +38,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void saveUserProfile(String name, String age, String gender, String description, String email) {
+    public boolean updateUserProfile(String name, String age, String gender, String description) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(COLUMN_NAME, name);
-        values.put(COLUMN_AGE, age);
-        values.put(COLUMN_GENDER, gender);
-        values.put(COLUMN_DESCRIPTION, description);
-        values.put(COLUMN_EMAIL, email);
+        values.put(COL_NAME, name);
+        values.put(COL_AGE, age);
+        values.put(COL_GENDER, gender);
+        values.put(COL_DESCRIPTION, description);
 
-        db.replace(TABLE_NAME, null, values);
-        db.close();
+        long result = db.update(TABLE_NAME, values, COL_ID + " = ?", new String[]{"1"}); // Assuming single user
+        return result != -1;
     }
 
     public Cursor getUserProfile() {
         SQLiteDatabase db = this.getReadableDatabase();
-        return db.query(TABLE_NAME, null, null, null, null, null, null);
+        return db.query(TABLE_NAME, null, COL_ID + " = ?", new String[]{"1"}, null, null, null);
     }
 }
 
