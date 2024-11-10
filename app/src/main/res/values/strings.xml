@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">JobSearchApp</string>
+    <string name="app_icon">App Icon</string>
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
     <string name="confirm_password_hint">Confirm Password</string>
     <string name="login_text">Login</string>
-    <string name="sign_up_text">Don\'t have an account? Sign Up</string>
     <string name="forgot_password_text">Forgot Password?</string>
     <string name="reset_password_text">Reset Password</string>
     <string name="register_text">Register</string>
@@ -17,6 +17,8 @@
     <string name="profile_title">Profile</string>
     <string name="password_reset_email_sent">Password reset email sent</string>
     <string name="password_reset_failed">Failed to send reset email</string>
+    <string name="sign_up_text">Don\'t have an account? <b>Sign Up</b></string>
+    <string name="sign_up_text_only">Sign Up</string>
 
     <!-- New strings for MainActivity (Home Page) -->
     <string name="search_hint">Search for jobs, companies, etc.</string>

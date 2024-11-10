@@ -1,7 +1,6 @@
 package student.inti.a202sgi;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -19,9 +18,10 @@ public class PasswordResetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_reset);
 
-        // Toolbar with back button
+        // Toolbar with app icon only, no title
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false); // Disable title
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setNavigationOnClickListener(v -> finish());
 
@@ -30,26 +30,24 @@ public class PasswordResetActivity extends AppCompatActivity {
         emailEditText = findViewById(R.id.emailEditText);
         resetPasswordButton = findViewById(R.id.resetPasswordButton);
 
-        resetPasswordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = emailEditText.getText().toString().trim();
+        resetPasswordButton.setOnClickListener(view -> {
+            String email = emailEditText.getText().toString().trim();
 
-                if (email.isEmpty()) {
-                    Toast.makeText(PasswordResetActivity.this, "Please enter your email", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                auth.sendPasswordResetEmail(email)
-                        .addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(PasswordResetActivity.this, "Reset link sent to your email", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(PasswordResetActivity.this, "Failed to send reset email", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+            if (email.isEmpty()) {
+                Toast.makeText(PasswordResetActivity.this, "Please enter your email", Toast.LENGTH_SHORT).show();
+                return;
             }
+
+            auth.sendPasswordResetEmail(email)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(PasswordResetActivity.this, "Reset link sent to your email", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(PasswordResetActivity.this, "Failed to send reset email", Toast.LENGTH_SHORT).show();
+                        }
+                    });
         });
     }
 }
+
 
