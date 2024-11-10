@@ -16,7 +16,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -42,6 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
             actionBar.setTitle("Profile");
         }
 
+        // Initialize Firebase and UI components
         auth = FirebaseAuth.getInstance();
         dbRef = FirebaseDatabase.getInstance().getReference("users");
         currentUser = auth.getCurrentUser();
@@ -100,7 +100,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         dbRef.child(currentUser.getUid()).setValue(profileData)
                 .addOnSuccessListener(aVoid -> {
+                    // Show success message
                     Toast.makeText(ProfileActivity.this, "Profile updated", Toast.LENGTH_SHORT).show();
+                    // Immediately update display and hide edit views
                     displayNameTextView.setText(name);
                     editNameEditText.setVisibility(View.GONE);
                     saveButton.setVisibility(View.GONE);
@@ -130,6 +132,3 @@ public class ProfileActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 }
-
-
-

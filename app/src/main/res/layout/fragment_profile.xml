@@ -1,24 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Toolbar with back button -->
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
-
-    <!-- Display profile information -->
     <TextView
         android:id="@+id/displayNameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
         android:text="Full Name"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -33,7 +21,7 @@
         android:textSize="16sp"
         android:layout_marginTop="8dp" />
 
-    <!-- Edit name input (hidden initially) -->
+    <!-- Editable Name -->
     <EditText
         android:id="@+id/editNameEditText"
         android:layout_width="match_parent"
@@ -43,16 +31,45 @@
         android:layout_marginTop="16dp"
         android:visibility="gone" />
 
-    <!-- Edit button -->
+    <!-- Skills Field -->
+    <EditText
+        android:id="@+id/editSkillsEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter skills"
+        android:layout_below="@id/editNameEditText"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <!-- Experience Field -->
+    <EditText
+        android:id="@+id/editExperienceEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter experience"
+        android:layout_below="@id/editSkillsEditText"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <!-- Education Field -->
+    <EditText
+        android:id="@+id/editEducationEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter education"
+        android:layout_below="@id/editExperienceEditText"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
+    <!-- Edit, Save, Reset Password, and Logout Buttons -->
     <Button
         android:id="@+id/editButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Edit Profile"
-        android:layout_below="@id/editNameEditText"
+        android:layout_below="@id/editEducationEditText"
         android:layout_marginTop="16dp" />
 
-    <!-- Save button (hidden initially) -->
     <Button
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
@@ -62,13 +79,20 @@
         android:layout_marginTop="16dp"
         android:visibility="gone" />
 
-    <!-- Reset password button -->
     <Button
         android:id="@+id/resetPasswordButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Reset Password"
         android:layout_below="@id/saveButton"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:layout_below="@id/resetPasswordButton"
         android:layout_marginTop="16dp" />
 </RelativeLayout>
 

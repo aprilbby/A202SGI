@@ -1,13 +1,13 @@
 package student.inti.a202sgi;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,24 +15,37 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int itemId = item.getItemId();
+        // Load the default fragment (Home) on startup
+        if (savedInstanceState == null) {
+            loadFragment(new HomeFragment());
+        }
 
-                if (itemId == R.id.navigation_home) {
-                    // Home tab clicked; stay on MainActivity
-                    return true;
-                } else if (itemId == R.id.navigation_profile) {
-                    // Profile tab clicked; navigate to ProfileActivity
-                    Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
-                return false;
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            Fragment selectedFragment = null;
+            if (item.getItemId() == R.id.navigation_home) {
+                selectedFragment = new HomeFragment();
+            } else if (item.getItemId() == R.id.navigation_profile) {
+                selectedFragment = new ProfileFragment();
             }
+
+            return loadFragment(selectedFragment);
         });
     }
+
+    private boolean loadFragment(Fragment fragment) {
+        if (fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, fragment)
+                    .commit();
+            return true;
+        }
+        return false;
+    }
 }
+
+
+
+
 
 

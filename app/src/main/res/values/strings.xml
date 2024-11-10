@@ -18,9 +18,16 @@
     <string name="password_reset_email_sent">Password reset email sent</string>
     <string name="password_reset_failed">Failed to send reset email</string>
 
-    <!-- New strings for navigation menu -->
+    <!-- New strings for MainActivity (Home Page) -->
+    <string name="search_hint">Search for jobs, companies, etc.</string>
+    <string name="job_title">Job Title</string>
+    <string name="company">Company</string>
+    <string name="location">Location</string>
+    <string name="job_listings_description">Job listings</string>
+
     <string name="navigation_home">Home</string>
     <string name="navigation_profile">Profile</string>
 </resources>
+
 
 
