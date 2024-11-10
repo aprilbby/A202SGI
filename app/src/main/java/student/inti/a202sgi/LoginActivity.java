@@ -2,7 +2,6 @@ package student.inti.a202sgi;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -44,8 +43,9 @@ public class LoginActivity extends AppCompatActivity {
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            finish();
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish(); // Closes LoginActivity after successful login
                         } else {
                             String errorMessage;
                             try {
@@ -62,10 +62,18 @@ public class LoginActivity extends AppCompatActivity {
                     });
         });
 
-        signUpTextView.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
-        forgotPasswordTextView.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, PasswordResetActivity.class)));
+        signUpTextView.setOnClickListener(view ->
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class))
+        );
+
+        forgotPasswordTextView.setOnClickListener(view ->
+                startActivity(new Intent(LoginActivity.this, PasswordResetActivity.class))
+        );
     }
 }
+
+
+
 
 
 
