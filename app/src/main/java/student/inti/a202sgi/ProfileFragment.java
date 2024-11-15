@@ -34,7 +34,6 @@ public class ProfileFragment extends Fragment {
         currentUser = auth.getCurrentUser();
         dbRef = FirebaseDatabase.getInstance().getReference("users").child(currentUser.getUid());
 
-        // Initialize UI elements
         emailTextView = view.findViewById(R.id.emailTextView);
         nameTextView = view.findViewById(R.id.nameTextView);
         ageTextView = view.findViewById(R.id.ageTextView);
