@@ -10,6 +10,7 @@
     <string name="password_hint">Password</string>
     <string name="confirm_password_hint">Confirm Password</string>
     <string name="login_text">Login</string>
+    <string name="logout_text">Logout</string>
     <string name="forgot_password_text">Forgot Password?</string>
     <string name="sign_up_text">Don\'t have an account? <b>Sign Up</b></string>
     <string name="sign_up_text_only">Sign Up</string>
@@ -40,13 +41,12 @@
     <string name="job_listings_description">Job listings</string>
     <string name="company_name">Company Name</string>
 
-
-
     <!-- Navigation -->
     <string name="navigation_home">Home</string>
     <string name="navigation_profile">Profile</string>
 
     <!-- Edit Profile -->
+    <string name="name_hint">Name</string>
     <string name="age_hint">Age</string>
     <string name="gender_hint">Gender</string>
     <string name="description_hint">Description</string>

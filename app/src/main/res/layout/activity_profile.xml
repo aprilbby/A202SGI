@@ -8,7 +8,7 @@
         android:id="@+id/displayEmailTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email"
+        android:text="@string/email_hint"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp" />
@@ -17,7 +17,7 @@
         android:id="@+id/displayNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name"
+        android:text="@string/name_hint"
         android:layout_below="@id/displayEmailTextView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />
@@ -26,7 +26,7 @@
         android:id="@+id/displayAgeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Age"
+        android:text="@string/age_hint"
         android:layout_below="@id/displayNameTextView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />
@@ -35,7 +35,7 @@
         android:id="@+id/displayGenderTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Gender"
+        android:text="@string/gender_hint"
         android:layout_below="@id/displayAgeTextView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />
@@ -44,7 +44,7 @@
         android:id="@+id/displayDescriptionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Description"
+        android:text="@string/description_hint"
         android:layout_below="@id/displayGenderTextView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />
@@ -53,7 +53,7 @@
         android:id="@+id/editProfileButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit Profile"
+        android:text="@string/edit_profile_button"
         android:layout_below="@id/displayDescriptionTextView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp" />
@@ -62,7 +62,7 @@
         android:id="@+id/resetPasswordButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reset Password"
+        android:text="@string/reset_password_text"
         android:layout_below="@id/editProfileButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />
@@ -71,7 +71,7 @@
         android:id="@+id/logoutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logout"
+        android:text="@string/logout_text"
         android:layout_below="@id/resetPasswordButton"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />
