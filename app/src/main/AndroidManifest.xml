@@ -11,8 +11,6 @@
         android:windowSoftInputMode="adjustResize"
         android:theme="@style/Theme.A202SGI">
 
-
-        <!-- Launcher activity (LoginActivity) -->
         <activity
             android:name=".LoginActivity"
             android:exported="true">
@@ -22,16 +20,12 @@
             </intent-filter>
         </activity>
 
-        <!-- MainActivity Declaration -->
         <activity android:name=".MainActivity" />
 
-        <!-- RegisterActivity Declaration -->
         <activity android:name=".RegisterActivity" />
 
-        <!-- PasswordResetActivity Declaration -->
         <activity android:name=".PasswordResetActivity" />
 
-        <!-- ProfileActivity Declaration -->
         <activity android:name=".ProfileActivity" />
 
         <activity android:name=".EditProfileActivity" />
