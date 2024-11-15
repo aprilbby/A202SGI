@@ -46,7 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COL_GENDER, gender);
         values.put(COL_DESCRIPTION, description);
 
-        long result = db.update(TABLE_NAME, values, COL_ID + " = ?", new String[]{"1"}); // Assuming single user
+        long result = db.update(TABLE_NAME, values, COL_ID + " = ?", new String[]{"1"});
         return result != -1;
     }
 

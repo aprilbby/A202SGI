@@ -50,16 +50,13 @@ public class ProfileFragment extends Fragment {
 
         loadUserProfile();
 
-        // Edit Profile button
         editProfileButton.setOnClickListener(v -> {
             Intent intent = new Intent(getActivity(), EditProfileActivity.class);
             startActivity(intent);
         });
 
-        // Reset password
         resetPasswordButton.setOnClickListener(v -> resetPassword());
 
-        // Logout
         logoutButton.setOnClickListener(v -> logout());
 
         return view;

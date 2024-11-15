@@ -31,7 +31,7 @@
     <string name="profile_update_failed">Failed to update profile</string>
     <string name="profile_title">Profile</string>
 
-    <!-- MainActivity (Home Page) -->
+    <!-- MainActivity -->
     <string name="search_hint">Search for jobs, companies, etc.</string>
     <string name="job_title">Job Title</string>
     <string name="company">Company</string>
@@ -42,7 +42,7 @@
     <string name="navigation_home">Home</string>
     <string name="navigation_profile">Profile</string>
 
-    <!-- Profile Edit Fields -->
+    <!-- Edit Profile -->
     <string name="age_hint">Age</string>
     <string name="gender_hint">Gender</string>
     <string name="description_hint">Description</string>

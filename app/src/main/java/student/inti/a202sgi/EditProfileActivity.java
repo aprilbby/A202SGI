@@ -22,20 +22,16 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        // Initialize Database Helper
         dbHelper = new DatabaseHelper(this);
 
-        // Initialize UI elements
         nameEditText = findViewById(R.id.nameEditText);
         ageEditText = findViewById(R.id.ageEditText);
         genderEditText = findViewById(R.id.genderEditText);
         descriptionEditText = findViewById(R.id.descriptionEditText);
         saveChangesButton = findViewById(R.id.saveChangesButton);
 
-        // Load current user profile
         loadUserProfile();
 
-        // Set onClickListener for Save button
         saveChangesButton.setOnClickListener(v -> saveUserProfile());
     }
 
@@ -74,7 +70,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
         if (result != -1) {
             Toast.makeText(this, "Profile updated successfully", Toast.LENGTH_SHORT).show();
-            finish(); // Close activity and return to ProfileActivity
+            finish();
         } else {
             Toast.makeText(this, "Failed to update profile", Toast.LENGTH_SHORT).show();
         }

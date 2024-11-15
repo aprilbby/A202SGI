@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-        // Load the default fragment (Home) on startup
         if (savedInstanceState == null) {
             loadFragment(new HomeFragment());
         }

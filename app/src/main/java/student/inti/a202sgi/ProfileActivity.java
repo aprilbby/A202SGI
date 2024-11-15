@@ -20,10 +20,8 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        // Initialize Database Helper
         dbHelper = new DatabaseHelper(this);
 
-        // Initialize UI components
         displayNameTextView = findViewById(R.id.displayNameTextView);
         displayEmailTextView = findViewById(R.id.displayEmailTextView);
         displayAgeTextView = findViewById(R.id.displayAgeTextView);
@@ -36,7 +34,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         loadUserProfile();
 
-        // Set onClickListeners
         editProfileButton.setOnClickListener(view -> startActivity(new Intent(ProfileActivity.this, EditProfileActivity.class)));
         resetPasswordButton.setOnClickListener(view -> Toast.makeText(this, "Password reset feature unavailable with SQLite", Toast.LENGTH_SHORT).show());
         logoutButton.setOnClickListener(view -> {

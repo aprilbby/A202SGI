@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- Display Email -->
     <TextView
         android:id="@+id/displayEmailTextView"
         android:layout_width="wrap_content"
@@ -14,7 +13,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp" />
 
-    <!-- Display Name -->
     <TextView
         android:id="@+id/displayNameTextView"
         android:layout_width="wrap_content"
@@ -24,7 +22,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />
 
-    <!-- Display Age -->
     <TextView
         android:id="@+id/displayAgeTextView"
         android:layout_width="wrap_content"
@@ -34,7 +31,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />
 
-    <!-- Display Gender -->
     <TextView
         android:id="@+id/displayGenderTextView"
         android:layout_width="wrap_content"
@@ -44,7 +40,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />
 
-    <!-- Display Description -->
     <TextView
         android:id="@+id/displayDescriptionTextView"
         android:layout_width="wrap_content"
@@ -54,7 +49,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />
 
-    <!-- Edit Profile Button -->
     <Button
         android:id="@+id/editProfileButton"
         android:layout_width="wrap_content"
@@ -64,7 +58,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="24dp" />
 
-    <!-- Reset Password Button -->
     <Button
         android:id="@+id/resetPasswordButton"
         android:layout_width="wrap_content"
@@ -74,7 +67,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />
 
-    <!-- Logout Button -->
     <Button
         android:id="@+id/logoutButton"
         android:layout_width="wrap_content"

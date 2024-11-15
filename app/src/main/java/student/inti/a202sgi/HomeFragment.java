@@ -25,7 +25,6 @@ public class HomeFragment extends Fragment {
         recyclerView = rootView.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        // Dummy job data for Malaysia-based jobs
         jobList = new ArrayList<>();
         jobList.add(new Job("Software Engineer", "TechCorp", "Kuala Lumpur, Malaysia"));
         jobList.add(new Job("Project Manager", "Innovatech", "Penang, Malaysia"));
