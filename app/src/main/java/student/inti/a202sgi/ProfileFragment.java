@@ -1,4 +1,3 @@
-// ProfileFragment.java
 package student.inti.a202sgi;
 
 import android.content.Intent;
