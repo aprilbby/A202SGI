@@ -4,6 +4,7 @@
     <string name="app_icon">App Icon</string>
     <string name="app_title">JobSearchApp</string>
 
+
     <!-- Login Screen Strings -->
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
@@ -37,6 +38,9 @@
     <string name="company">Company</string>
     <string name="location">Location</string>
     <string name="job_listings_description">Job listings</string>
+    <string name="company_name">Company Name</string>
+
+
 
     <!-- Navigation -->
     <string name="navigation_home">Home</string>
