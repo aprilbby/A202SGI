@@ -9,7 +9,10 @@
         android:id="@+id/nameEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/full_name_hint" />
+        android:autofillHints=""
+        android:hint="@string/full_name_hint"
+        android:minHeight="48dp"
+        tools:ignore="VisualLintTextFieldSize" />
 
     <EditText
         android:id="@+id/ageEditText"
@@ -17,9 +20,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/nameEditText"
         android:layout_marginTop="8dp"
+        android:autofillHints=""
         android:hint="@string/age_hint"
         android:inputType="number"
-        tools:ignore="TouchTargetSizeCheck" />
+        tools:ignore="TouchTargetSizeCheck,VisualLintTextFieldSize" />
 
     <EditText
         android:id="@+id/genderEditText"
@@ -27,7 +31,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/ageEditText"
         android:layout_marginTop="8dp"
-        android:hint="@string/gender_hint" />
+        android:autofillHints=""
+        android:hint="@string/gender_hint"
+        android:minHeight="48dp"
+        tools:ignore="TextFields,VisualLintTextFieldSize" />
 
     <EditText
         android:id="@+id/descriptionEditText"
@@ -35,7 +42,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/genderEditText"
         android:layout_marginTop="8dp"
-        android:hint="@string/description_hint" />
+        android:autofillHints=""
+        android:hint="@string/description_hint"
+        android:minHeight="48dp"
+        android:textColorHint="#8D6E63"
+        tools:ignore="TextFields,VisualLintTextFieldSize" />
 
     <Button
         android:id="@+id/saveChangesButton"
